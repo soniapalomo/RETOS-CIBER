@@ -3,48 +3,418 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roblox Gratis</title>
-  <link rel="stylesheet" href="style.css">
+  <title>¿Quién está detrás de la cuenta falsa? - Evidencias</title>
+  <style>
+    :root {
+      --ink: #151923;
+      --muted: #5f6878;
+      --line: #d9dee8;
+      --paper: #f7f8fb;
+      --panel: #ffffff;
+      --ig: #d62976;
+      --discord: #5865f2;
+      --tiktok: #111111;
+      --warn: #b45f06;
+      --good: #087f5b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.45;
+    }
+    header {
+      padding: 28px 24px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 920px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto 48px;
+    }
+    .note {
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .evidence {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 8px 18px rgba(20, 25, 35, 0.08);
+    }
+    .tag {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .tag span:last-child {
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .screen { padding: 14px; }
+    .phone {
+      max-width: 335px;
+      margin: 0 auto;
+      border: 9px solid #20242e;
+      border-radius: 24px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .appbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #eceff5;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .igbar { color: var(--ig); }
+    .ttbar { color: var(--tiktok); }
+    .storybar { background: #1d1f27; color: #fff; border: 0; }
+    .post-head, .comment, .message, .profile-line {
+      display: flex;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .avatar {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #64b5f6, #ffd166);
+      display: grid;
+      place-items: center;
+      color: #20242e;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .avatar.red { background: linear-gradient(135deg, #ff7b7b, #ffe66d); }
+    .avatar.green { background: linear-gradient(135deg, #51cf66, #74c0fc); }
+    .avatar.dark { background: linear-gradient(135deg, #343a40, #adb5bd); color: #fff; }
+    .name { font-weight: 700; }
+    .handle, .time, .small { color: var(--muted); font-size: 12px; }
+    .photo {
+      margin: 0;
+      min-height: 178px;
+      background: #e9edf5;
+      border-top: 1px solid #eceff5;
+      border-bottom: 1px solid #eceff5;
+      position: relative;
+      overflow: hidden;
+    }
+    .photo.court {
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,.55) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(255,255,255,.55) 50%, transparent 51%),
+        #7bbf8a;
+    }
+    .photo.library {
+      background:
+        repeating-linear-gradient(90deg, #9b6b43 0 16px, #835735 16px 20px),
+        #d8c3a5;
+    }
+    .photo.lockers {
+      background:
+        repeating-linear-gradient(90deg, #b7c7d8 0 44px, #90a8bd 44px 47px),
+        #dfe8ef;
+    }
+    .photo.desk {
+      background:
+        radial-gradient(circle at 72% 55%, #222 0 8px, transparent 9px),
+        linear-gradient(0deg, #c79b67 0 44%, #eef1f6 45%);
+    }
+    .photo:after {
+      content: attr(data-caption);
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      max-width: calc(100% - 20px);
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.88);
+      font-size: 12px;
+      color: #2b303b;
+    }
+    .caption, .post-actions {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+    .caption b { font-weight: 700; }
+    .comments {
+      border-top: 1px solid #eceff5;
+      background: #fbfcff;
+    }
+    .bubble {
+      background: #f0f2f7;
+      border-radius: 8px;
+      padding: 8px 10px;
+      width: 100%;
+      font-size: 13px;
+    }
+    .discord {
+      background: #313338;
+      color: #f2f3f5;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .discord .appbar {
+      border-color: #404249;
+      color: #fff;
+      background: #2b2d31;
+    }
+    .discord .bubble {
+      background: transparent;
+      color: #f2f3f5;
+      padding: 0;
+    }
+    .discord .handle, .discord .time, .discord .small { color: #b5bac1; }
+    .discord .message { border-bottom: 1px solid #3f4147; }
+    .sheet {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #edf0f5;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f3f6fb; }
+    .notice {
+      padding: 12px;
+      border-left: 4px solid var(--warn);
+      background: #fff8e6;
+      font-size: 13px;
+    }
+    .check {
+      padding: 12px;
+      border-left: 4px solid var(--good);
+      background: #edfdf6;
+      font-size: 13px;
+    }
+    .footer {
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid #eceff5;
+      background: #fbfcff;
+    }
+    @media print {
+      body { background: #fff; }
+      header, main { width: 100%; }
+      .evidence { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
 </head>
 <body>
-  <header class="top">
-    <div class="wrap nav">
-      <div class="brand"><span>R</span>Roblox Gratis</div>
-      <nav>
-        <a href="index.html">Inicio</a>
-        <a href="verificacion.html">Verificacion</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <a href="sobre-nosotros.html">Sobre Nosotros</a>
-      </nav>
-    </div>
+  <header>
+    <h1>¿Quién está detrás de la cuenta falsa?</h1>
+    <p class="lead">Paquete de evidencias simuladas para un reto CTF educativo de 2º ESO. Todo el contenido es ficticio y está diseñado para evaluar investigación digital, verificación de información, huella digital e ingeniería social básica.</p>
   </header>
-  <main class="wrap">
-    <section class="panel hero">
-      <div>
-        <span class="badge">Regalos para jugadores</span>
-        <h1>Regalos exclusivos Roblox</h1>
-        <p>Consigue premios unicos mediante campanas activas para usuarios de la comunidad. El sitio muestra informacion legal y un canal de ayuda para resolver dudas.</p>
-        <div class="actions">
-          <a class="btn" href="verificacion.html">Ver codigo</a>
+  <main>
+    <div class="note"><strong>Instrucciones para el alumnado:</strong> revisa las evidencias, compara fechas, nombres de usuario, horas, publicaciones y contradicciones. La respuesta final debe introducirse como <strong>FLAG{NOMBREUSUARIO}</strong>.</div>
+    <section class="grid">
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 01 - Captura de Instagram</span><span>Cuenta falsa</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar igbar"><span>@mateo.oficial_2b</span><span>19:21</span></div>
+            <div class="post-head">
+              <div class="avatar red">M</div>
+              <div><div class="name">Mateo Ruiz</div><div class="handle">@mateo.oficial_2b · 14 mayo</div></div>
+            </div>
+            <div class="photo court" data-caption="Patio del instituto. Foto tomada desde la grada."></div>
+            <div class="caption"><b>@mateo.oficial_2b</b> hoy toca esconderse del examen de mates. Algunos no se enteran de nada.</div>
+            <div class="footer">Publicado a las 19:21. La cuenta usa una foto de perfil parecida a la real.</div>
+          </div>
         </div>
-        <div class="safety-note">No introduzcas datos si no confias en la pagina. Revisa contacto y aviso legal antes de continuar.</div>
-      </div>
-      <form class="login-box" action="verificacion.html">
-        <strong>Inicia sesion para reclamar</strong>
-        <p>Se usa para confirmar que el premio corresponde a una cuenta activa.</p>
-        <label>
-          Usuario
-          <input type="text" name="usuario" placeholder="Nombre de usuario">
-        </label>
-        <label>
-          Contrasena
-          <input type="password" name="clave" placeholder="Contrasena">
-        </label>
-        <button type="submit">Continuar</button>
-      </form>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 02 - Comentarios</span><span>Reacciones al post</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar igbar"><span>Comentarios</span><span>14 mayo</span></div>
+            <div class="comment"><div class="avatar green">L</div><div class="bubble"><span class="name">@lucia_2b</span> Mateo está conmigo en clase ahora, esto no lo ha subido él.</div></div>
+            <div class="comment"><div class="avatar">D</div><div class="bubble"><span class="name">@dani.gmz</span> seguro que es alguien de 2B, porque conoce lo del examen.</div></div>
+            <div class="comment"><div class="avatar dark">A</div><div class="bubble"><span class="name">@alex.mp7</span> Pues yo estaba entrenando a esa hora. Ni idea.</div></div>
+            <div class="footer">Tres posibles sospechosos iniciales: Dani, Alex y Nora.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 03 - Historia de Instagram</span><span>Cuenta falsa</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar storybar"><span>@mateo.oficial_2b</span><span>21:08</span></div>
+            <div class="photo lockers" data-caption="Pasillo de taquillas. Sticker: 'si sabes mirar, sabes quién soy'."></div>
+            <div class="caption">Texto sobre la historia: "mañana más pistas desde la biblioteca 👀"</div>
+            <div class="footer">La cuenta falsa anuncia la biblioteca para el día siguiente.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 04 - Conversación de Discord</span><span>#2b-general</span></div>
+        <div class="screen">
+          <div class="discord">
+            <div class="appbar"><span>#2b-general</span><span>14 mayo</span></div>
+            <div class="message"><div class="avatar">D</div><div class="bubble"><span class="name">dani_gmz</span> <span class="time">19:16</span><br>Estoy en casa sin batería casi. ¿Alguien tiene los apuntes?</div></div>
+            <div class="message"><div class="avatar dark">alex_mp7</div><div class="bubble"><span class="name">alex_mp7</span> <span class="time">19:23</span><br>Entreno hasta las 20:15, luego miro.</div></div>
+            <div class="message"><div class="avatar green">N</div><div class="bubble"><span class="name">nora.draws</span> <span class="time">19:25</span><br>yo estoy editando una cosa, luego paso foto.</div></div>
+            <div class="footer">Ruido y coartadas parciales: nadie queda confirmado solo con esto.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 05 - Perfil de TikTok</span><span>@nora_draws13</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar ttbar"><span>TikTok</span><span>@nora_draws13</span></div>
+            <div class="profile-line"><div class="avatar green">N</div><div><div class="name">Nora</div><div class="handle">@nora_draws13 · 2B · dibujo y edits</div></div></div>
+            <div class="caption">Bio: "si sabes mirar, sabes quién soy". Último video fijado: "editando desde la biblioteca".</div>
+            <div class="photo library" data-caption="Miniatura: mesa de biblioteca con libreta azul y pegatina de estrella."></div>
+            <div class="footer">Frase coincidente con la historia de la cuenta falsa.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 06 - Fotografía</span><span>Mesa de biblioteca</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar"><span>Foto recibida</span><span>15 mayo · 17:42</span></div>
+            <div class="photo desk" data-caption="Mesa B3. Libreta azul con estrella. Reflejo de una funda verde en el móvil."></div>
+            <div class="caption">La foto aparece recortada en una publicación posterior de la cuenta falsa.</div>
+            <div class="footer">Permite comparar objeto, lugar y recorte.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 07 - Publicación de Instagram</span><span>Cuenta falsa</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar igbar"><span>@mateo.oficial_2b</span><span>15 mayo</span></div>
+            <div class="photo desk" data-caption="Misma mesa B3 recortada. Se ve solo una esquina de libreta azul."></div>
+            <div class="caption"><b>@mateo.oficial_2b</b> desde mi sitio favorito. Mateo nunca lo sabrá.</div>
+            <div class="footer">Publicado a las 17:58, 16 minutos después de la foto de biblioteca.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 08 - Registro de club</span><span>Biblioteca</span></div>
+        <div class="screen">
+          <div class="sheet">
+            <table>
+              <thead><tr><th>Fecha</th><th>Hora</th><th>Alumno/a</th><th>Actividad</th></tr></thead>
+              <tbody>
+                <tr><td>15 mayo</td><td>17:20-18:10</td><td>Nora Salas</td><td>Club de dibujo digital</td></tr>
+                <tr><td>15 mayo</td><td>17:30-18:00</td><td>Dani Gómez</td><td>Devolución de libro</td></tr>
+                <tr><td>15 mayo</td><td>18:15-18:45</td><td>Alex Moreno</td><td>Trabajo de tecnología</td></tr>
+              </tbody>
+            </table>
+            <div class="footer">Dato útil, pero no concluyente por sí solo: Dani también estuvo cerca.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 09 - Comentario antiguo</span><span>Publicación real de Mateo</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar igbar"><span>@mateo_ruiz_real</span><span>9 mayo</span></div>
+            <div class="comment"><div class="avatar green">N</div><div class="bubble"><span class="name">@nora_draws13</span> Tu móvil siempre sale borroso, Mateo. Algún día te hago yo los edits.</div></div>
+            <div class="comment"><div class="avatar">D</div><div class="bubble"><span class="name">@dani.gmz</span> jajaja la cámara de Mateo es legendaria.</div></div>
+            <div class="footer">Indica capacidad/interés de Nora en editar contenido, pero también hay ruido de Dani.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 10 - Historia de Alex</span><span>Distractor</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar storybar"><span>@alex_mp7</span><span>14 mayo · 19:40</span></div>
+            <div class="photo court" data-caption="Pista deportiva municipal. Marcador: 19:38."></div>
+            <div class="caption">Texto: "entreno eterno".</div>
+            <div class="footer">Parece relevante por la hora, pero no conecta con biblioteca, frase ni recorte.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 11 - Perfil secundario</span><span>Distractor</span></div>
+        <div class="screen">
+          <div class="phone">
+            <div class="appbar igbar"><span>@dani.memazos</span><span>Perfil</span></div>
+            <div class="profile-line"><div class="avatar">D</div><div><div class="name">Dani</div><div class="handle">@dani.memazos · memes de clase</div></div></div>
+            <div class="caption">Bio: "No soy Mateo, soy peor". Última publicación: meme sobre el examen de mates.</div>
+            <div class="notice">La bio suena sospechosa, pero no coincide con el patrón principal.</div>
+            <div class="footer">Distractor fuerte: humor parecido, sin pruebas de lugar/horario/frase.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 12 - Discord privado</span><span>Contradicción</span></div>
+        <div class="screen">
+          <div class="discord">
+            <div class="appbar"><span>DM: nora.draws → lucia_2b</span><span>15 mayo</span></div>
+            <div class="message"><div class="avatar green">N</div><div class="bubble"><span class="name">nora.draws</span> <span class="time">17:39</span><br>No puedo mandar lo de plástica, estoy en casa sin WiFi.</div></div>
+            <div class="message"><div class="avatar green">N</div><div class="bubble"><span class="name">nora.draws</span> <span class="time">17:44</span><br>Bueno, luego te digo.</div></div>
+            <div class="footer">Contradice el registro de biblioteca y la foto de las 17:42.</div>
+          </div>
+        </div>
+      </article>
+      <article class="evidence">
+        <div class="tag"><span>Evidencia 13 - Comparación de usuarios</span><span>Patrón objetivo</span></div>
+        <div class="screen">
+          <div class="sheet">
+            <table>
+              <thead><tr><th>Cuenta</th><th>Nombre visible</th><th>Patrón</th></tr></thead>
+              <tbody>
+                <tr><td>@mateo.oficial_2b</td><td>Mateo Ruiz</td><td>usa guion bajo + clase 2B</td></tr>
+                <tr><td>@nora_draws13</td><td>Nora</td><td>usa guion bajo + edad 13</td></tr>
+                <tr><td>nora.draws</td><td>Nora</td><td>misma raíz: nora + draws</td></tr>
+                <tr><td>@dani.gmz / @dani.memazos</td><td>Dani</td><td>no repite frase ni biblioteca</td></tr>
+              </tbody>
+            </table>
+            <div class="check">El patrón de alias refuerza la hipótesis, pero necesita combinarse con horario, frase, foto y contradicción.</div>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
-  <footer class="wrap">Roblox Gratis - Beneficios de comunidad</footer>
 </body>
 </html>
